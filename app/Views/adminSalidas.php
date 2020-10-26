@@ -11,6 +11,7 @@
                     <table class="table table-striped table-bordered table condensed table-hover table-responsive " >
                         <thead>
                             <tr>
+                            <th scope="col">Acciones</th>
                             <th scope="col">Id_Salida</th>
                             <th scope="col">Id_Clasificacion</th>
                             <th scope="col">Nombre_Salida</th>
@@ -20,7 +21,6 @@
                             <th scope="col">NoIncluye_Salida</th>
                             <th scope="col">Tipo_De_Salida</th>
                             <th scope="col">Tipo_De_Dificultad</th>
-                            <th scope="col">Acciones</th>
                                                         
                             </tr>
                         </thead>
@@ -28,6 +28,12 @@
                         <?php
                         foreach($salidas as $salida){
                             echo "<tr>";
+                            echo "<td>";
+                        ?>
+                        <a href="<?php echo base_url();?>/salidaNueva/editar?idSalida=<?php echo $salida['idSalida'];?>" class="btn btn-warning" role="button"> <i class="fa fa-pencil-square-o"></i></a> <br>
+                        <a href="<?php echo base_url();?>/salidaNueva/eliminar?idSalida=<?php echo $salida['idSalida'];?>" class="btn btn-danger" role="button"> <i class="fa fa-trash"></i></a>
+                        <?php
+                            echo "</td>";
                             echo "<td>".$salida['idSalida']."</td>";
                             echo "<td>".$salida['idClasificacion']."</td>";
                             echo "<td>".$salida['nombreSalida']."</td>";    
@@ -37,12 +43,6 @@
                             echo "<td>".$salida['noIncluyeSalida']."</td>";
                             echo "<td>".$salida['tipoSalida']."</td>"; 
                             echo "<td>".$salida['tipoDificultad']."</td>";    
-                            echo "<td>";
-                        ?>
-                        <a href="<?php echo base_url();?>/salidaNueva/editar?idSalida=<?php echo $salida['idSalida'];?>" class="btn btn-warning" role="button"> <i class="fa fa-pencil-square-o"></i></a>
-                        <a href="<?php echo base_url();?>/salidaNueva/eliminar?idSalida=<?php echo $salida['idSalida'];?>" class="btn btn-danger" role="button"> <i class="fa fa-trash"></i></a>
-                        <?php
-                         
                         }    
                         ?>    
                         </tbody>

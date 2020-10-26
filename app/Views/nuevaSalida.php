@@ -38,8 +38,11 @@
                 
                 <div class="form-group">
                         <?php
-                        echo form_label('Direccion en Mapa','dirMapa'); 
-                        echo form_input(array('name'=>'dirMapa', 'class'=>'form-control'));
+                        echo form_label('Direccion en Mapa ','dirMapa'); 
+                        echo form_label('  -Recuerde buscar la direccion en Google Maps ','dirMapa'); 
+                        echo form_label(' -Dar en el boton compartir y seleccionar la opcion insertar mapa ','dirMapa'); 
+                        echo form_label(' -Copiar el link html, y pegar en el campo siguiente solo lo que va dentro de las comillas del src el resto eliminarlo','dirMapa'); 
+                        echo form_textarea(array('name'=>'dirMapa', 'class'=>'form-control'));
                         ?> 
                 </div>
                 

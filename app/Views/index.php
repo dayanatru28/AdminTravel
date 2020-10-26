@@ -18,7 +18,7 @@
                     <a class="nav-link" href="<?php echo base_url(); ?>/AdminTipoDificultad/index">Tipos de dificultad</a>
                     <a class="nav-link" href="<?php echo base_url(); ?>/AdminTipoSalida/index">Tipos de Salida</a>
                     <a class="nav-link" href="<?php echo base_url(); ?>/AdminCotizaciones/index">Cotizaciones</a>
-                    <a class="nav-link" href="#">Reservaciones</a>
+                    <a class="nav-link" href="<?php echo base_url(); ?>/AdminReservaciones/index">Reservaciones</a>
                     </div>
                 </div>
             </div>

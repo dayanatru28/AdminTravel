@@ -30,7 +30,7 @@ class AdminImagenes extends BaseController
 	//Inserta la direccion de a imagen y el tipo de salida
 
 	public function insertar(){
-
+		//$this->guardarImagen();
 		$imagenesModel= new ImagenesModel();
 		$request=\Config\Services::request();
 		
@@ -67,6 +67,28 @@ class AdminImagenes extends BaseController
 		$estructura=view('head').view('header').view('index').view('adminImagenes',$imagenesModel);
 		return $estructura;
 		
+	}
+
+	private function guardarImagen(){
+		$mi_imagen = 'direcFoto';
+    	$config['upload_path'] = "./public/img";
+    	$config['file_name'] = "nombre_archivo";
+    	$config['allowed_types'] = "gif|jpg|jpeg|png";
+   		$config['max_size'] = "50000";
+    	$config['max_width'] = "2000";
+		$config['max_height'] = "2000";
+		   
+	$this->upload = new Upload($config);
+    //$this->load->library('upload', $config);
+
+    if (!$this->upload->do_upload($mi_imagen)) {
+        //*** ocurrio un error
+        $data['uploadError'] = $this->upload->display_errors();
+        echo $this->upload->display_errors();
+        return;
+    }
+
+    $data['uploadSuccess'] = $this->upload->data();
 	}
 
 }

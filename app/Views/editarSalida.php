@@ -71,7 +71,7 @@
                 <div class="form-group">
                         <?php
                         echo form_label('Direccion en Mapa','dirMapa'); 
-                        echo form_input(array('name'=>'dirMapa', 'class'=>'form-control','value'=>$dirMapa));
+                        echo form_textarea(array('name'=>'dirMapa', 'class'=>'form-control','value'=>$dirMapa));
                         ?> 
                 </div>
                 

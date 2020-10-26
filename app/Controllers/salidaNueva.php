@@ -24,7 +24,7 @@ class salidaNueva extends BaseController
 
 		$datos['tiposSalida']=$tiposSalida;
 		$datos['tiposDificultad']=$tiposDificultad;
-		$estructura=view('head').view('header').view('nuevaSalida',$datos);
+		$estructura=view('head').view('header').view('index').view('nuevaSalida',$datos);
 		return $estructura;
 	}
 
@@ -37,14 +37,13 @@ class salidaNueva extends BaseController
         //como llega en arreglo, se convierte el valor en un numero para buscar en la base de datos, se suma 1 porque el arreglo comienza en 0 y los id desde 1
         $tSalida=intval($tipoSalida);
 		$tSalida=$tSalida+1;
-		echo($tSalida);
 
 		//Recibe el tipo de dificultad para ingresar a la base de datos
 		$tipoDificultad=$request->getPostGet('tiposDificultad');
         //como llega en arreglo, se convierte el valor en un numero para buscar en la base de datos, se suma 1 porque el arreglo comienza en 0 y los id desde 1
         $tDificultad=intval($tipoDificultad);
 		$tDificultad=$tDificultad+1;
-		echo($tDificultad);
+
 
 		$salidasModel= new SalidasModel();
 		$request=\Config\Services::request();
@@ -91,14 +90,14 @@ class salidaNueva extends BaseController
 		$tiposDificultad= $TipoDificultadModel->findColumn('nombreTipoDificultad');
 		$tiposDificultad= array('tiposDificultad'=>$tiposDificultad);
 
-
+		//busco la informacion ingresada anteriormente
 		$salidasModel= new SalidasModel();
 		$request=\Config\Services::request();
 		$idSalida=$request->getPostGet('idSalida');
 		$salidas=$salidasModel->find([$idSalida]);
 		$salidas=array('salidas'=>$salidas);
 
-		
+		//integro las dos busquedas en un solo arreglo
 		$datos['tiposSalida']=$tiposSalida;
 		$datos['tiposDificultad']=$tiposDificultad;
 		$datos['salidas']=$salidas;
