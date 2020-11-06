@@ -28,7 +28,8 @@
                                         echo "<td>".$sitios['desSitio']."</td>";       
                                         echo "<td>";
                                     ?>
-                                    <a href="<?php echo base_url();?>/AdminSitiosInteres/editar?idSitio=<?php echo $sitios['idSitio'];?>" class="btn btn-warning" role="button"> <i class="fa fa-pencil-square-o"></i></a> </br>
+                                    <!-- Al editar se pasan los valores de valores de la salida y el sitio para realizar la busqueda -->
+                                    <a href="<?php echo base_url();?>/AdminSitiosInteres/formEditar?idSitio=<?php echo $sitios['idSitio'];?>&idSalida=<?php echo $sitios['idSalida'];?>" class="btn btn-warning" role="button"> <i class="fa fa-pencil-square-o"></i></a> </br>
                                     <a href="<?php echo base_url();?>/AdminSitiosInteres/eliminar?idSitio=<?php echo $sitios['idSitio'];?>" class="btn btn-danger" role="button"> <i class="fa fa-trash"></i></a>
                                     <?php
                                     

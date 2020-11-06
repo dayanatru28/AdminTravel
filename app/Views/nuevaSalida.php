@@ -1,7 +1,3 @@
-<?php
-       
-        echo form_open('/salidaNueva/insertar');
-?>
 </br>
 </br>
 <center> <h2> Complete el formulario para ingresar una nueva salida </h2> </center>
@@ -10,22 +6,31 @@
 </br> </br>
 
 <div class=container>
-            <form>
+    <form action="<?= base_url('/salidaNueva/insertar') ?>"  method="post" enctype="multipart/form-data">
 
                 <div class="form-row">
-                    <div class="form-group col-md-6">
+                    <div class="form-group col-md-2">
                         <?php
                             echo form_label('Id de Clasificacion','idClasificacion'); 
                             echo form_input(array('name'=>'idClasificacion', 'class'=>'form-control'));
                             ?>
                     </div>
 
-                    <div class="form-group col-md-6">
+                    <div class="form-group col-md-5">
                             <?php
                             echo form_label('Nombre de Salida','nombreSalida'); 
                             echo form_input(array('name'=>'nombreSalida', 'class'=>'form-control'));
                             ?> 
                     </div>
+                    <!-- Carga el archivo-->
+                    <div class="form-group col-md-5">
+                            <?php 
+                            echo form_label('Foto principal de la salida','fileToUpload');
+                            ?></br><?php
+                            echo form_upload(array('type'=>'file','name'=>'fileToUpload', 'id'=>'fileToUpload'));?>
+                            <!--<input type="file" name="fileToUpload" id="fileToUpload">-->
+                    </div>
+
                 </div>
                 
                 
@@ -87,8 +92,7 @@
                     echo form_hidden('idSalida',$salida[0]['idSalida']);} ?>
             </form>
         </div>
-        <?php echo form_close(); ?>
-
+ 
 
             </br> </br>
    <div>         

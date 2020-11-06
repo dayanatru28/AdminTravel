@@ -1,6 +1,6 @@
 <?php
        
-        echo form_open('/salidaNueva/insertar');
+        //echo form_open('/salidaNueva/editar');
         // recibo la informacion del id para editar-
     foreach($salidas as $salida){
 			
@@ -42,7 +42,7 @@
 <center> <h4> 1-Huila ----- 2-Nacional </h4> </center>
 </br> </br>
 <div class=container>
-            <form>
+        <form action="<?= base_url('/salidaNueva/editar') ?>"  method="post" enctype="multipart/form-data">
 
                 <div class="form-row">
                     <div class="form-group col-md-6">
@@ -60,19 +60,36 @@
                     </div>
                 </div>
                 
-                
-                <div class="form-group">
+                <div class="form-row">
+                    <div class="form-group col-md-8">
                         <?php
                         echo form_label('Descripcion de Salida','desSalida'); 
                         echo form_textarea(array('name'=>'desSalida', 'class'=>'form-control','value'=>$desSalida));
                         ?>
+                    </div>
+                    <div class="form-group col-md-4">
+                        <?php echo form_label('Foto de la salida','fotoSalida'); ?>
+                        <div class="card__image card__image--fence">
+                            <img class="d-block w-100" src="<?php echo base_url();echo $salida[0]['fotoSalida'] ?>" > </img>
+                        </div>   
+                    </div>
                 </div>
                 
-                <div class="form-group">
+                <div class="form-row">
+                    <div class="form-group col-md-8">
                         <?php
                         echo form_label('Direccion en Mapa','dirMapa'); 
                         echo form_textarea(array('name'=>'dirMapa', 'class'=>'form-control','value'=>$dirMapa));
                         ?> 
+                    </div>
+                    <div class="form-group col-md-4">
+                        <!-- Carga el archivo-->
+                        <?php 
+                        echo form_label('Ubicacion Del archivo','fileToUpload');
+                        ?></br><?php
+                        echo form_upload(array('type'=>'file','name'=>'fileToUpload', 'id'=>'fileToUpload'));?>
+                
+                    </div>
                 </div>
                 
                 <div class="form-row">
@@ -110,13 +127,13 @@
                     
                 
                 <center>
-                <?php echo form_submit('insertar','Insertar','class="btn btn-danger"'); ?>
+                <?php echo form_submit('editar','Editar','class="btn btn-danger"'); ?>
                 <center>
                 <?php if(isset($salida)){
                     echo form_hidden('idSalida',$salida[0]['idSalida']);} ?>
             </form>
         </div>
-        <?php echo form_close(); ?>
+        <?php //echo form_close(); ?>
 
 
             </br> </br>

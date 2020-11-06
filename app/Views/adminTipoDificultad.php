@@ -1,7 +1,7 @@
 <!-- Tabla para editar y mostrar las salidas-->
 </br> </br>
             <center>
-            <a class="btn btn-danger btn-lg" href="<?php echo base_url(); ?>/AdminTipoDificultad/mostrarFormulario"  role="button">Ingre un nuevo tipo de dificultad</a>
+            <a class="btn btn-danger btn-lg" href="<?php echo base_url(); ?>/AdminTipoDificultad/mostrarFormulario"  role="button">Ingrese un nuevo tipo de dificultad</a>
             </center>
             </br>
             <div class= "container">

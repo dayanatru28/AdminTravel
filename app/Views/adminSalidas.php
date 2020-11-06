@@ -16,6 +16,7 @@
                             <th scope="col">Id_Clasificacion</th>
                             <th scope="col">Nombre_Salida</th>
                             <th scope="col">Descripcion_Salida</th>
+                            <th scope="col">Foto</th>
                             <th scope="col">Mapa_Salida</th>
                             <th scope="col">Incluye_Salida</th>
                             <th scope="col">NoIncluye_Salida</th>
@@ -30,14 +31,15 @@
                             echo "<tr>";
                             echo "<td>";
                         ?>
-                        <a href="<?php echo base_url();?>/salidaNueva/editar?idSalida=<?php echo $salida['idSalida'];?>" class="btn btn-warning" role="button"> <i class="fa fa-pencil-square-o"></i></a> <br>
+                        <a href="<?php echo base_url();?>/salidaNueva/formEditar?idSalida=<?php echo $salida['idSalida'];?>" class="btn btn-warning" role="button"> <i class="fa fa-pencil-square-o"></i></a> <br>
                         <a href="<?php echo base_url();?>/salidaNueva/eliminar?idSalida=<?php echo $salida['idSalida'];?>" class="btn btn-danger" role="button"> <i class="fa fa-trash"></i></a>
                         <?php
                             echo "</td>";
                             echo "<td>".$salida['idSalida']."</td>";
                             echo "<td>".$salida['idClasificacion']."</td>";
                             echo "<td>".$salida['nombreSalida']."</td>";    
-                            echo "<td>".$salida['desSalida']."</td>";     
+                            echo "<td>".$salida['desSalida']."</td>";  
+                            echo "<td>".$salida['fotoSalida']."</td>";    
                             echo "<td>".$salida['dirMapa']."</td>";    
                             echo "<td>".$salida['incluyeSalida']."</td>";    
                             echo "<td>".$salida['noIncluyeSalida']."</td>";

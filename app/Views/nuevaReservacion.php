@@ -37,9 +37,17 @@
                             <div class="form-group">
                                 <?php 
                                 echo form_label('Destino','destino');
-                                ?></br><?php
-                                echo form_dropdown('destino', $salidasModel);
-                                ?>
+                                ?></br>
+                                <!-- De la consulta realizada selecciono los nombres de los lugares disponibles por un ciclo -->
+                                <select class="form-control" name="destino" id="destino">
+                                    <?php  for ($i=0; $i < count($salidasModel) ; $i++) {                           
+                                    ?>
+                                        <option value="<?php echo($salidasModel[$i]["nombreSalida"])?>"><?php echo($salidasModel[$i]["nombreSalida"])?></option>
+                                    <?php
+                                    }
+                                    ?>
+                                </select>
+
                         </div>
                         </div>
                         <div class="form-group col-md-4">
@@ -69,13 +77,13 @@
                             <?php 
                                 echo form_label('Dia de salida:','diaSalida');?>
                                 <br>
-                                <input type="date" name="trip-start1" id="start1" value="<?php echo set_value('trip-start1'); ?> " min="2020-01-01" max="2030-12-31" required="" />
+                                <input type="date" name="trip-start1" id="start1" value="<?php echo set_value('trip-start1'); ?> " min="<?php echo date("Y-m-d"); ?>" max="2030-12-31" required="" />
                         </div> 
                         <div class="form-group col-md-2">
                             <?php 
                                 echo form_label('Dia de Llegada:','diaLlegada');?>
                                 <br>
-                                <input type="date" name="trip-start" id="start" value="<?php echo set_value('trip-start'); ?> " min="2020-01-01" max="2030-12-31" required="" />
+                                <input type="date" name="trip-start" id="start" value="<?php echo set_value('trip-start'); ?> " min="<?php echo date("Y-m-d"); ?>" max="2030-12-31" required="" />
                         </div> 
                        
                     </div>

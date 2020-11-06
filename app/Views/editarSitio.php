@@ -2,15 +2,13 @@
 
 <?php
        
-       echo form_open('/AdminSitiosInteres/insertar');
+       echo form_open('/AdminSitiosInteres/editar');
 
        foreach($SitiosInteresModel as $sitios){
 			
 		
-
-        if(isset($sitios)){
-            $idSalida=intval($sitios[0]['idSalida']);
-            $idSalida=(($idSalida)-1);
+        //Trae toda la informacion guardada anteriormente y se almacena en variables para poder ponerlas en los campos del formulario
+        if(isset($sitios)){           
             $nombreSitio=$sitios[0]['nombreSitio'];
             $desSitio=$sitios[0]['desSitio'];
         }
@@ -21,10 +19,9 @@
         }
     }
 
-
 ?>
 </br></br>
-<center> <h2> Complete el formulario para ingresar un nuevo Sitio de Interes </h2> </center>
+<center> <h2> Complete el formulario para Eeditar un  Sitio de Interes </h2> </center>
 </br> </br>
 
 <div class="container">
@@ -34,9 +31,16 @@
                 <div class="form-group">
                         <?php 
                         echo form_label('Salida','idSalida');
-                        ?></br><?php
-                        echo form_dropdown('idSalida', $salidasModel,$idSalida);
+                        ?></br>
+                        <!-- De la consulta realizada selecciono los nombres de los lugares disponibles por un ciclo -->
+                        <?php 
+                            //Se utiliza la consulta de la salida para traer el nombre ingresado anteriormente 
+                            foreach($salidasModel as $salidasModel){
+                                $nombreSalida=$salidasModel[0]['nombreSalida'];
+                            }
+                            echo form_input(array('name'=>'idSalida', 'class'=>'form-control','value'=>$nombreSalida, 'disabled'=>''));
                         ?>
+
                 </div>
                 <div class="form-group">
                     <?php
@@ -52,7 +56,7 @@
                     ?>
                 </div>
 
-                <?php echo form_submit('insertar','Insertar','class="btn btn-danger"'); ?>
+                <?php echo form_submit('editar','Editar','class="btn btn-danger"'); ?>
             <center>
             </br></br>
             <?php if(isset($sitios)){

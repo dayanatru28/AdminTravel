@@ -47,7 +47,7 @@
                         echo "<td>".$reservaciones['menReserva']."</td>";       
                         echo "<td>";
                     ?>
-                    <a href="<?php echo base_url();?>/AdminReservaciones/editar?idReservacion=<?php echo $reservaciones['idReservacion'];?>" class="btn btn-warning" role="button"> <i class="fa fa-pencil-square-o"></i></a> <br>
+                    <a href="<?php echo base_url();?>/AdminReservaciones/formEditar?idReservacion=<?php echo $reservaciones['idReservacion'];?>" class="btn btn-warning" role="button"> <i class="fa fa-pencil-square-o"></i></a> <br>
                     <?php
                         echo "</td>";
                         echo "<td>";

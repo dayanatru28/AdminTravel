@@ -12,4 +12,12 @@ class SalidasModel extends Model
 
     protected $allowedFields = ['idClasificacion', 'nombreSalida','desSalida','dirMapa','incluyeSalida','noIncluyeSalida','fotoSalida','tipoDificultad','tipoSalida'];
 
+     //Agrega direccion de las imagenes en cada una
+
+    protected $beforeInsert=['agregarDirecFoto'];
+
+    protected function agregarDirecFoto(array $data){
+        $data['data']['fotoSalida']="/public/img/salida/".$data['data']['fotoSalida'];
+        return $data;
+    }
 }

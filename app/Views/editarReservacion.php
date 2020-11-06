@@ -2,23 +2,18 @@
 <?php
 
     // recibo la informacion del id para editar-
-    foreach($reservaciones as $reservacion){
-			
-		
-
-        if(isset($reservacion)){
-            $nombreReserva=$reservacion[0]['nombreReserva'];
-            $correoReserva=$reservacion[0]['correoReserva'];
-            $salidaReserva=$reservacion[0]['salidaReserva'];
-            //Se resta un valor dado a que en la base de datos se guarda como numero la clasifacacion y al hacer la consulta se trae como arreglo entonces se modifica el id 
-            $destino=intval($reservacion[0]['destinoReserva']);
-            $destino=(($destino)-1);
-            $cantPersonas=$reservacion[0]['cantPersonas'];
-            $cantNinos=$reservacion[0]['cantNinos'];
-            $costoPersona=$reservacion[0]['costoPersona'];
-            $diaSalida=$reservacion[0]['diaSalida'];
-            $diaLlegada=$reservacion[0]['diaLlegada'];
-            $menReserva=$reservacion[0]['menReserva'];
+    
+        if(isset($reservaciones)){
+            $nombreReserva=$reservaciones[0]['nombreReserva'];
+            $correoReserva=$reservaciones[0]['correoReserva'];
+            $salidaReserva=$reservaciones[0]['salidaReserva'];
+            $destino=$reservaciones[0]['destinoReserva'];
+            $cantPersonas=$reservaciones[0]['cantPersonas'];
+            $cantNinos=$reservaciones[0]['cantNinos'];
+            $costoPersona=$reservaciones[0]['costoPersona'];
+            $diaSalida=$reservaciones[0]['diaSalida'];
+            $diaLlegada=$reservaciones[0]['diaLlegada'];
+            $menReserva=$reservaciones[0]['menReserva'];
         }
         else{
             $nombreReserva="";
@@ -33,7 +28,6 @@
             $menReserva="";
 
         }
-    }
 ?>
 
 
@@ -43,13 +37,10 @@
     <h4 class="search_title"> Por favor diligencie el formulario para editar una reservacion</h4> <br>
 </div>
 </center>
- <!-- Utiliza el helper form para la recepcion de informacion -->
-
-     
-
+<!-- Utiliza el helper form para la recepcion de informacion -->    
 <!--formulario-->
     <div class=container>
-          <form method="post" action="<?php echo base_url('/AdminReservaciones/insertar')?>">
+          <form method="post" action="<?php echo base_url('/AdminReservaciones/editar')?>">
                 <div class="form-group">
                     <?php 
                     echo form_label('Nombre de la persona que reserva','nombreReserva');
@@ -77,7 +68,7 @@
                                 <?php 
                                 echo form_label('Destino','destino');
                                 ?></br><?php
-                                echo form_dropdown('destino', $salidasModel,$destino);
+                                echo form_input(array('name'=>'destino','id'=>'destino','class'=>'form-control','value'=>$destino));
                                 ?>
                         </div>
                         </div>
@@ -116,7 +107,7 @@
                                 echo form_label('Dia de Llegada:','diaLlegada');
                                 echo(' seleccionado anteriormente '.$diaLlegada);?>
                                 <br>
-                                <input type="date" name="trip-start" id="start" value="<?php echo set_value('trip-start'); ?> min="2020-01-01" max="2030-12-31" required="" />
+                                <input type="date" name="trip-start" id="start" value="<?php echo set_value('trip-start'); ?> " min="<?php echo date("Y-m-d"); ?>" max="2030-12-31" required="" />
                         </div> 
                        
                     </div>
@@ -128,10 +119,10 @@
                         ?>
                 </div>
                 <center>
-                    <?php echo form_submit('insertar','Ingresar Reserva','class="btn btn-danger"'); ?>
+                    <?php echo form_submit('editar','Ingresar Reserva','class="btn btn-danger"'); ?>
                 <center>
-                    <?php if(isset($reservacion)){
-                    echo form_hidden('idReservacion',$reservacion[0]['idReservacion']);} ?>
+                    <?php if(isset($reservaciones)){
+                    echo form_hidden('idReservacion',$reservaciones[0]['idReservacion']);} ?>
             </form>
     </div>
     <?php echo form_close(); ?>

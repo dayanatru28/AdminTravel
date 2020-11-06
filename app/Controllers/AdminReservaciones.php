@@ -18,34 +18,27 @@ class AdminReservaciones extends BaseController
     }
 	
 	//Permite vizualisar el formulario para ingresar una nueva reservacion
-
 	public function nuevaReservacion(){
 
 		$salidasModel= new SalidasModel();
-		$salidasModel= $salidasModel->findColumn('nombreSalida');
+		//Envia la consulta de todas las salidas disponibles hasta el momento
+		$salidasModel= $salidasModel->findAll();
 		$salidasModel= array('salidasModel'=>$salidasModel);
-
 		$estructura=view('head').view('header').view('index').view('nuevaReservacion',$salidasModel);
 		return $estructura;
 
 	}
 
-	//Permite insertar o modificar una nueva Reservacion por parte de la corporacion
-
+	//Permite insertar una nueva Reservacion por parte de la corporacion
 	public function insertar(){
 		$ReservacionesModel= new ReservacionesModel();
 		$request=\Config\Services::request();
-
-		$idSalida=$request->getPostGet('destino');
-        //como llega en arreglo, se convierte el valor en un numero para buscar en la base de datos, se suma 1 porque el arreglo comienza en 0 y los id desde 1
-        $idSalida=intval($idSalida);
-		$idSalida=$idSalida+1;
-		
+		//Recibe los datos y los almacena en un arreglo
 		$data = array(
 			'nombreReserva'    => $request->getPostGet('nombreReserva'),
 			'correoReserva'    =>  $request->getPostGet('correoReserva'),
 			'salidaReserva'    =>  $request->getPostGet('salidaReserva'),
-			'destinoReserva'    => $idSalida,
+			'destinoReserva'    => $request->getPostGet('destino'),
 			'cantPersonas'    =>  $request->getPostGet('cantPersonas'),
 			'cantNinos'    =>  $request->getPostGet('cantNinos'),
 			'costoPersona'    =>  $request->getPostGet('costoPersona'),
@@ -74,25 +67,53 @@ class AdminReservaciones extends BaseController
 	}
 
 	//Presenta el formulario de editar con la informacion ingresada anteriormente de cada reservacion
-	public function editar(){
-
-		$salidasModel= new SalidasModel();
-		$salidasModel= $salidasModel->findColumn('nombreSalida');
-		$salidasModel= array('salidasModel'=>$salidasModel);
-
+	public function formEditar(){
 		//busco la informacion ingresada anteriormente
 		$ReservacionesModel= new ReservacionesModel();
 		$request=\Config\Services::request();
 		$idReservacion=$request->getPostGet('idReservacion');
 		$reservaciones=$ReservacionesModel->find([$idReservacion]);
-		$reservaciones=array('reservacion'=>$reservaciones);
+		$reservaciones=array('reservaciones'=>$reservaciones);
 
-		//integro las dos busquedas en un solo arreglo
-		$datos['salidasModel']=$salidasModel;
-		$datos['reservaciones']=$reservaciones;
-
-		$estructura=view('head').view('header').view('index').view('editarReservacion',$datos);
+		$estructura=view('head').view('header').view('index').view('editarReservacion',$reservaciones);
 		return $estructura;
+
+	}
+
+	//Permite editar la informacion ingresada de una reservacion
+
+	public function editar(){
+		$ReservacionesModel= new ReservacionesModel();
+		$request=\Config\Services::request();
+		//Recibe los datos y los almacena en un arreglo
+		$data = array(
+			'nombreReserva'    => $request->getPostGet('nombreReserva'),
+			'correoReserva'    =>  $request->getPostGet('correoReserva'),
+			'salidaReserva'    =>  $request->getPostGet('salidaReserva'),
+			'cantPersonas'    =>  $request->getPostGet('cantPersonas'),
+			'cantNinos'    =>  $request->getPostGet('cantNinos'),
+			'costoPersona'    =>  $request->getPostGet('costoPersona'),
+			'diaSalida'    =>  $request->getPostGet('trip-start1'),
+			'diaLlegada'    =>  $request->getPostGet('trip-start'),
+			'menReserva'    =>  $request->getPostGet('menReserva')
+		);
+
+		//me permite saber si ya hay una reservacion con el mismo numero solo modifica la informacion si no es asi crea un id nuevo
+
+		if($request->getPostGet('idReservacion')){
+			$data['idReservacion']=$request->getPostGet('idReservacion');
+		}
+		
+		if($ReservacionesModel->save($data)===false)	{
+			echo ("Eey.. No podemos agregar tu solicitud");
+		}
+		else{
+			$this->sendMail();
+			$ReservacionesModel=$ReservacionesModel->findAll();
+			$ReservacionesModel=array('ReservacionesModel'=>$ReservacionesModel);		
+			$estructura=view('head').view('header').view('index').view('adminReservaciones',$ReservacionesModel);
+			return $estructura;
+		}	
 
 	}
 	
@@ -117,6 +138,7 @@ class AdminReservaciones extends BaseController
 		$subject = ('Reservacion Corporacion Cuspide');
 		$nombre=$request->getPostGet('nombreReserva');
 		$salida=$request->getPostGet('salidaReserva');
+		$destino=$request->getPostGet('destino');
 		$cantPersonas=$request->getPostGet('cantPersonas');
 		$cantNinos=$request->getPostGet('cantNinos');
 		$costoPersona=$request->getPostGet('costoPersona');
@@ -126,13 +148,13 @@ class AdminReservaciones extends BaseController
 		
 
 		$message =('La corporacion cuspide ha realizado una reservacion sobre un viaje a nombre de '.$nombre. 
-		' Para salir desde: '.$salida. ' hacia:  Cantidad de personas a viajar: '.$cantPersonas. ' Cantidad de niños: '.$cantNinos.
+		' Para salir desde: '.$salida. ' hacia: '.$destino.'  Cantidad de personas a viajar: '.$cantPersonas. ' Cantidad de niños: '.$cantNinos.
 		' Dia  de la salida: '.$diaSalida. ' Dia de llegada: '.$diaLlegada. ' Mensaje Final. '.$menReserva);
         
         $email = \Config\Services::email();
 
         $email->setTo($to);
-        $email->setFrom('leidy28ortega@gmail.com', 'Confirm Registration');
+        $email->setFrom('leidy28ortega@gmail.com', 'Nueva reserva con Cuspide');
         
         $email->setSubject($subject);
         $email->setMessage($message);
