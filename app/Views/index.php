@@ -15,6 +15,7 @@
                     <a class="nav-link active" href="<?php echo base_url(); ?>/Home/index">Salidas<span class="sr-only">(current)</span></a>
                     <a class="nav-link" href="<?php echo base_url(); ?>/AdminImagenes/index">Imagenes</a>
                     <a class="nav-link" href="<?php echo base_url(); ?>/AdminSitiosInteres/index">Sitios de Interes</a>
+                    <a class="nav-link" href="<?php echo base_url(); ?>/AdminActividadesTur/index">Actividades de Ecoturismo</a>
                     <a class="nav-link" href="<?php echo base_url(); ?>/AdminTipoDificultad/index">Tipos de dificultad</a>
                     <a class="nav-link" href="<?php echo base_url(); ?>/AdminTipoSalida/index">Tipos de Salida</a>
                     <a class="nav-link" href="<?php echo base_url(); ?>/AdminCotizaciones/index">Cotizaciones</a>

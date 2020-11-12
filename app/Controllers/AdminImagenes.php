@@ -47,7 +47,7 @@ class AdminImagenes extends BaseController
 	public function upload(){
 			
 		//Guarda la imagen en una carpeta	
-		$target_dir = "./public/img/"; //directorio en el que se subira
+		$target_dir = "./public/img/multimedia/"; //directorio en el que se subira
 		$target_file = $target_dir . basename($_FILES["fileToUpload"]["name"]);//se añade el directorio y el nombre del archivo
 		$uploadOk = 1;//se añade un valor determinado en 1
 		$imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
