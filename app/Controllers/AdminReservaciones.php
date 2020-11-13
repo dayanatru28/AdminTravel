@@ -155,19 +155,11 @@ class AdminReservaciones extends BaseController
 		$to = $this->request->getVar('correoReserva');
 		$subject = ('Reservacion Corporacion Cuspide');
 		$nombre=$request->getPostGet('nombreReserva');
-		$salida=$request->getPostGet('salidaReserva');
-		$destino=$request->getPostGet('destino');
-		$cantPersonas=$request->getPostGet('cantPersonas');
-		$cantNinos=$request->getPostGet('cantNinos');
-		$costoPersona=$request->getPostGet('costoPersona');
-		$diaSalida=$request->getPostGet('trip-start1');
-		$diaLlegada=$request->getPostGet('trip-start');
-		$menReserva=$request->getPostGet('menReserva');
 		
 
 		$message =('La corporacion cuspide ha realizado una reservacion sobre un viaje a nombre de '.$nombre. 
-		' Para salir desde: '.$salida. ' hacia: '.$destino.'  Cantidad de personas a viajar: '.$cantPersonas. ' Cantidad de niños: '.$cantNinos.
-		' Dia  de la salida: '.$diaSalida. ' Dia de llegada: '.$diaLlegada. ' Mensaje Final. '.$menReserva.' Su Codigo para verificar su reservacion en la pagina principal es: '.$codigo);
+		' Para consultar la información de su reserva ingrese a la pagina principal de Cuspide Travel y digite el siguiente codigo
+		en la seccion de reservas: '.$codigo);
         
         $email = \Config\Services::email();
 
