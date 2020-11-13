@@ -4,6 +4,7 @@
     // recibo la informacion del id para editar-
     
         if(isset($reservaciones)){
+            $codigoReserva=$reservaciones[0]['codigoReserva'];
             $nombreReserva=$reservaciones[0]['nombreReserva'];
             $correoReserva=$reservaciones[0]['correoReserva'];
             $salidaReserva=$reservaciones[0]['salidaReserva'];
@@ -16,6 +17,7 @@
             $menReserva=$reservaciones[0]['menReserva'];
         }
         else{
+            $codigoReserva="";
             $nombreReserva="";
             $correoReserva="";
             $salidaReserva="";
@@ -41,11 +43,19 @@
 <!--formulario-->
     <div class=container>
           <form method="post" action="<?php echo base_url('/AdminReservaciones/editar')?>">
-                <div class="form-group">
-                    <?php 
-                    echo form_label('Nombre de la persona que reserva','nombreReserva');
-                    echo form_input(array('name'=>'nombreReserva','class'=>'form-control','value'=>$nombreReserva,'required'=>''));
-                    ?>
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <?php 
+                        echo form_label('Codigo de la reserva','codigoReserva');
+                        echo form_input(array('name'=>'codigoReserva','class'=>'form-control','value'=>$codigoReserva,'required'=>''));
+                        ?>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <?php 
+                        echo form_label('Nombre de la persona que reserva','nombreReserva');
+                        echo form_input(array('name'=>'nombreReserva','class'=>'form-control','value'=>$nombreReserva,'required'=>''));
+                        ?>
+                    </div>
                 </div>
                 <div class="form-row">
                     <div class="form-group col-md-6">

@@ -2,6 +2,7 @@
 </br> </br>
 <center> <h2> Estas son todas las reservaciones que la corporacion ha realizado </h2> </center>
 </br> </br>
+
 <center>
 <a class="btn btn-danger btn-lg" href="<?php echo base_url(); ?>/AdminReservaciones/nuevaReservacion"  role="button">Agregar una Nueva Reservacion</a>
 </center>
@@ -15,7 +16,7 @@
             <table class="table table-striped table-bordered table condensed table-hover table-responsive " >
                 <thead>
                     <tr>
-                        <th scope="col">Id de Reservacion</th>
+                        <th scope="col">Codigo de la Reservacion</th>
                         <th scope="col">Nombre_Reservante</th>
                         <th scope="col">Correo Electronico</th>
                         <th scope="col">Lugar de salida</th>
@@ -34,7 +35,7 @@
                     <?php
                     foreach($ReservacionesModel as $reservaciones){
                         echo "<tr>";
-                        echo "<td>".$reservaciones['idReservacion']."</td>";
+                        echo "<td>".$reservaciones['codigoReserva']."</td>";
                         echo "<td>".$reservaciones['nombreReserva']."</td>";
                         echo "<td>".$reservaciones['correoReserva']."</td>"; 
                         echo "<td>".$reservaciones['salidaReserva']."</td>"; 

@@ -33,8 +33,25 @@ class AdminReservaciones extends BaseController
 	public function insertar(){
 		$ReservacionesModel= new ReservacionesModel();
 		$request=\Config\Services::request();
+
+		//Genero el codigo de reserva para luego la busqueda en la pagina principal
+		$permitted_chars = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+ 
+		function generate_string($input, $strength = 16) {
+			$input_length = strlen($input);
+			$random_string = '';
+			for($i = 0; $i < $strength; $i++) {
+				$random_character = $input[mt_rand(0, $input_length - 1)];
+				$random_string .= $random_character;
+			}
+		
+			return $random_string;
+		}
+		$codigo=generate_string($permitted_chars, 10); 
+
 		//Recibe los datos y los almacena en un arreglo
 		$data = array(
+			'codigoReserva'	   => $codigo,
 			'nombreReserva'    => $request->getPostGet('nombreReserva'),
 			'correoReserva'    =>  $request->getPostGet('correoReserva'),
 			'salidaReserva'    =>  $request->getPostGet('salidaReserva'),
@@ -57,7 +74,7 @@ class AdminReservaciones extends BaseController
 			echo ("Eey.. No podemos agregar tu solicitud");
 		}
 		else{
-			$this->sendMail();
+			$this->sendMail($codigo);
 			$ReservacionesModel=$ReservacionesModel->findAll();
 			$ReservacionesModel=array('ReservacionesModel'=>$ReservacionesModel);		
 			$estructura=view('head').view('header').view('index').view('adminReservaciones',$ReservacionesModel);
@@ -86,6 +103,7 @@ class AdminReservaciones extends BaseController
 		$ReservacionesModel= new ReservacionesModel();
 		$request=\Config\Services::request();
 		//Recibe los datos y los almacena en un arreglo
+		$codigo=$request->getPostGet('codigoReserva');
 		$data = array(
 			'nombreReserva'    => $request->getPostGet('nombreReserva'),
 			'correoReserva'    =>  $request->getPostGet('correoReserva'),
@@ -108,7 +126,7 @@ class AdminReservaciones extends BaseController
 			echo ("Eey.. No podemos agregar tu solicitud");
 		}
 		else{
-			$this->sendMail();
+			$this->sendMail($codigo);
 			$ReservacionesModel=$ReservacionesModel->findAll();
 			$ReservacionesModel=array('ReservacionesModel'=>$ReservacionesModel);		
 			$estructura=view('head').view('header').view('index').view('adminReservaciones',$ReservacionesModel);
@@ -132,7 +150,7 @@ class AdminReservaciones extends BaseController
 	}
 
 	//Funcion que me permite enviar un correo a la persona ingresada para reportar su reservacion
-	public function sendMail() { 
+	public function sendMail($codigo) { 
 		$request=\Config\Services::request();
 		$to = $this->request->getVar('correoReserva');
 		$subject = ('Reservacion Corporacion Cuspide');
@@ -149,7 +167,7 @@ class AdminReservaciones extends BaseController
 
 		$message =('La corporacion cuspide ha realizado una reservacion sobre un viaje a nombre de '.$nombre. 
 		' Para salir desde: '.$salida. ' hacia: '.$destino.'  Cantidad de personas a viajar: '.$cantPersonas. ' Cantidad de niños: '.$cantNinos.
-		' Dia  de la salida: '.$diaSalida. ' Dia de llegada: '.$diaLlegada. ' Mensaje Final. '.$menReserva);
+		' Dia  de la salida: '.$diaSalida. ' Dia de llegada: '.$diaLlegada. ' Mensaje Final. '.$menReserva.' Su Codigo para verificar su reservacion en la pagina principal es: '.$codigo);
         
         $email = \Config\Services::email();
 

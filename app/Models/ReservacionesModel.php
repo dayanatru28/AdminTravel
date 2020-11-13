@@ -10,6 +10,6 @@ class ReservacionesModel extends Model
     protected $returnType     = 'array';
     protected $useSoftDeletes = true;
 
-    protected $allowedFields = ['nombreReserva', 'correoReserva','salidaReserva','destinoReserva','cantPersonas','cantNinos','costoPersona','diaSalida','diaLlegada','menReserva'];
+    protected $allowedFields = ['codigoReserva','nombreReserva', 'correoReserva','salidaReserva','destinoReserva','cantPersonas','cantNinos','costoPersona','diaSalida','diaLlegada','menReserva'];
 
 }
