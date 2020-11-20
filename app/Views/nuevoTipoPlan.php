@@ -1,22 +1,22 @@
 <?php
        
-       echo form_open('/AdminTipoSalida/insertar');
+       echo form_open('/AdminTipoPlan/insertar');
 ?>
 </br>
 </br>
-<center> <h2> Complete el formulario para ingresar un nuevo tipo de Salida </h2> </center>
+<center> <h2> Complete el formulario para ingresar una nueva Actividad Deportiva </h2> </center>
 </br> </br>
  
- <!--Formulario para ingresar un nuevo tipo de Salida-->
+ <!--Formulario para ingresar un nuevo tipo de Plan-->
 
  <div class=container>
         <form> 
             <center>
                 <div class="form-group">
                         <?php 
-                        echo form_label('Nombre del tipo de Salida','nombreTipoSalida');
+                        echo form_label('Nombre del tipo de Plan','nombreTipoPlan');
                         ?></br><?php
-                        echo form_input(array('name'=>'nombreTipoSalida', 'class'=>'form-control'));
+                        echo form_input(array('name'=>'nombreTipoPlan', 'class'=>'form-control'));
                         ?>
                  </div>
                  

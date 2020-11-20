@@ -1,7 +1,7 @@
 <!-- Tabla para editar y mostrar las salidas-->
 </br> </br>
             <center>
-            <a class="btn btn-danger btn-lg" href="<?php echo base_url(); ?>/AdminTipoSalida/mostrarFormulario"  role="button">Ingrese el nuevo tipo de salida</a>
+            <a class="btn btn-danger btn-lg" href="<?php echo base_url(); ?>/AdminTipoPlan/mostrarFormulario"  role="button">Ingrese una nueva Actividad Deportiva</a>
             </center>
             </br>
             <div class= "container">
@@ -10,21 +10,21 @@
                         <table class="table table-striped table-bordered table condensed table-hover table-responsive " >
                             <thead>
                                 <tr>
-                                <th scope="col">Id_Tipo_Salida</th>
-                                <th scope="col">Nombre_Tipo_De_Salida</th>
+                                <th scope="col">Id_Tipo_Plan</th>
+                                <th scope="col">Nombre_Tipo_De_Plan</th>
                                 <th scope="col">Acciones</th>
                                 
                                 </tr>
                             </thead>
                             <tbody>
                                 <?php
-                                foreach($TipoSalidaModel as $tsalida){
+                                foreach($TipoPlanModel as $tplan){
                                     echo "<tr>";
-                                    echo "<td>".$tsalida['idTipoSalida']."</td>";
-                                    echo "<td>".$tsalida['nombreTipoSalida']."</td>";     
+                                    echo "<td>".$tplan['idTipoPlan']."</td>";
+                                    echo "<td>".$tplan['nombreTipoPlan']."</td>";     
                                     echo "<td>";
                                 ?>
-                                <a href="<?php echo base_url();?>/AdminTipoSalida/eliminar?idTipoSalida=<?php echo $tsalida['idTipoSalida'];?>" class="btn btn-danger" role="button"> <i class="fa fa-trash"></i></a>
+                                <a href="<?php echo base_url();?>/AdminTipoPlan/eliminar?idTipoPlan=<?php echo $tplan['idTipoPlan'];?>" class="btn btn-danger" role="button"> <i class="fa fa-trash"></i></a>
                                 <?php
                                 
                                 }    
@@ -34,4 +34,4 @@
                     </div>
                 </div>
             </div>      
-            
+           

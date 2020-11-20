@@ -1,6 +1,5 @@
 <?php
-       
-        //echo form_open('/salidaNueva/editar');
+
         // recibo la informacion del id para editar-
     foreach($salidas as $salida){
 			
@@ -14,11 +13,7 @@
             $incluyeSalida=$salida[0]['incluyeSalida'];
             $noIncluyeSalida=$salida[0]['noIncluyeSalida'];
             $fotoSalida=$salida[0]['fotoSalida'];
-            //Se resta un valor dado a que en la base de datos se guarda como numero la clasifacacion y al hacer la consulta se trae como arreglo entonces se modifica el id 
-            $tipoDificultad=intval($salida[0]['tipoDificultad']);
-            $tipoDificultad=(($tipoDificultad)-1);
-            $tipoSalida=intval($salida[0]['tipoSalida']);
-            $tipoSalida=(($tipoSalida)-1);
+            $tipoDificultad=$salida[0]['tipoDificultad'];
         }
         else{
             $idClasificacion="";
@@ -29,8 +24,7 @@
             $noIncluyeSalida="";
             $fotoSalida="";
             $tipoDificultad="";
-            $tipoSalida="";
-
+            
         }
     }
 ?>
@@ -42,7 +36,7 @@
 <center> <h4> 1-Huila ----- 2-Nacional </h4> </center>
 </br> </br>
 <div class=container>
-        <form action="<?= base_url('/salidaNueva/editar') ?>"  method="post" enctype="multipart/form-data">
+        <form action="<?= base_url('/AdminSalidas/editar') ?>"  method="post" enctype="multipart/form-data">
 
                 <div class="form-row">
                     <div class="form-group col-md-6">
@@ -106,24 +100,6 @@
                         ?>
                     </div>
                 </div>
-
-                    <div class="form-row">
-                        <div class="form-group col-md-6">
-                            <?php 
-                            echo form_label('Tipo de Salida','tipoSalida');
-                            ?></br><?php
-                            echo form_dropdown('tipoSalida', $tiposSalida,$tipoSalida);
-                            ?>
-                        </div>
-
-                        <div class="form-group col-md-6">
-                            <?php 
-                            echo form_label('Tipo de Dificultad','tiposDificultad');
-                            ?></br><?php
-                            echo form_dropdown('tiposDificultad', $tiposDificultad,$tipoDificultad);
-                            ?>
-                        </div>
-                    </div>
                     
                 
                 <center>

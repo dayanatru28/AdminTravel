@@ -6,7 +6,7 @@
 </br> </br>
 
 <div class=container>
-    <form action="<?= base_url('/salidaNueva/insertar') ?>"  method="post" enctype="multipart/form-data">
+    <form action="<?= base_url('/AdminSalidas/insertar') ?>"  method="post" enctype="multipart/form-data">
 
                 <div class="form-row">
                     <div class="form-group col-md-2">
@@ -66,23 +66,20 @@
                     </div>
                 </div>
 
-                    <div class="form-row">
-                        <div class="form-group col-md-6">
-                            <?php 
-                            echo form_label('Tipo de Salida','tipoSalida');
-                            ?></br><?php
-                            echo form_dropdown('tipoSalida', $tiposSalida);
-                            ?>
-                        </div>
-
-                        <div class="form-group col-md-6">
-                            <?php 
-                            echo form_label('Tipo de Dificultad','tiposDificultad');
-                            ?></br><?php
-                            echo form_dropdown('tiposDificultad', $tiposDificultad);
-                            ?>
-                        </div>
-                    </div>
+                <div class="form-group">
+                        <?php 
+                        echo form_label('Dificultad','idTipoDificultad');
+                        ?></br>
+                        <!-- De la consulta realizada selecciono los nombres de los lugares disponibles por un ciclo -->
+                        <select class="form-control" name="idTipoDificultad" id="idTipoDificultad">
+                        <?php  for ($i=0; $i < count($tiposDificultad) ; $i++) {                           
+                        ?>
+                            <option value="<?php echo($tiposDificultad[$i]["idTipoDificultad"])?>"><?php echo($tiposDificultad[$i]["nombreTipoDificultad"])?></option>
+                        <?php
+                        }
+                        ?>
+                        </select>
+                </div>
                     
                 
                 <center>

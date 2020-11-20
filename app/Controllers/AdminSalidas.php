@@ -2,33 +2,33 @@
 
 use CodeIgniter\Controller;
 use App\Models\SalidasModel;
-use App\Models\TipoSalidaModel;
 use App\Models\TipoDificultadModel;
 
-class salidaNueva extends BaseController
+class AdminSalidas extends BaseController
 {
-	//Muestra el formulario para ingresar una nueva salida
 	public function index()
-	{	
-		//Trae la informacion de los tipos de salida que se encuentran registrados
-		$TiposalidasModel= new TipoSalidaModel();
-		//Buscador tipo Salida
-		$tiposSalida= $TiposalidasModel->findColumn('nombreTipoSalida');
-		$tiposSalida= array('tiposSalida'=>$tiposSalida);
-
+	{
+		//Muestra la primera vista del administrador en este caso el admin de salidas
+		$salidasModel= new SalidasModel();
+		$salidas=$salidasModel->findAll();
+		$salidas=array('salidas'=>$salidas);
+		$estructura=view('head').view('header').view('index').view('adminSalidas',$salidas);
+		return $estructura;
+    }
+    
+    //Muestra el formulario para ingresar una nueva salida
+	public function mostrarFormulario()
+	{			
 		//Trae la informacion de los tipos de dificultad que se encuentran registrados
 		$TipoDificultadModel= new TipoDificultadModel();
 		//Buscador tipo Salida
-		$tiposDificultad= $TipoDificultadModel->findColumn('nombreTipoDificultad');
+		$tiposDificultad= $TipoDificultadModel->findAll();
 		$tiposDificultad= array('tiposDificultad'=>$tiposDificultad);
-
-		$datos['tiposSalida']=$tiposSalida;
-		$datos['tiposDificultad']=$tiposDificultad;
-		$estructura=view('head').view('header').view('index').view('nuevaSalida',$datos);
+		$estructura=view('head').view('header').view('index').view('nuevaSalida',$tiposDificultad);
 		return $estructura;
-	}
-
-	//Inserta o edita una salida
+    }
+    
+    //Inserta o edita una salida
 	
 	public function insertar(){
 
@@ -74,16 +74,7 @@ class salidaNueva extends BaseController
 				// Si la imagen a subir cumple con todos los requisitos se ingresa el resto de informacion a la base de datos
 				//Recibe el tipo de salida para ingresar a la base de datos
 				$request=\Config\Services::request();
-				$tipoSalida=$request->getPostGet('tipoSalida');
-				//como llega en arreglo, se convierte el valor en un numero para buscar en la base de datos, se suma 1 porque el arreglo comienza en 0 y los id desde 1
-				$tSalida=intval($tipoSalida);
-				$tSalida=$tSalida+1;
-
-				//Recibe el tipo de dificultad para ingresar a la base de datos
-				$tipoDificultad=$request->getPostGet('tiposDificultad');
-				//como llega en arreglo, se convierte el valor en un numero para buscar en la base de datos, se suma 1 porque el arreglo comienza en 0 y los id desde 1
-				$tDificultad=intval($tipoDificultad);
-				$tDificultad=$tDificultad+1;
+		
 
 				//Recibo el nombre de la imagen y la guardo en una variable
 				$foto = $_FILES["fileToUpload"]["name"];
@@ -98,8 +89,7 @@ class salidaNueva extends BaseController
 					'dirMapa'    =>  $request->getPostGet('dirMapa'),
 					'incluyeSalida'    => $request->getPostGet('incluyeSalida'),
 					'noIncluyeSalida'    =>  $request->getPostGet('noIncluyeSalida'),
-					'tipoSalida'    =>  $tSalida,
-					'tipoDificultad' =>$tDificultad
+					'tipoDificultad' => $request->getPostGet('idTipoDificultad')
 				);
 				if($request->getPostGet('idSalida')){
 					$data['idSalida']=$request->getPostGet('idSalida');
@@ -117,23 +107,19 @@ class salidaNueva extends BaseController
 			} else {
 				echo "Error al cargar el archivo";
 			}
-		}		
-	}
+        }	
+        
+    }
+    
 
-	//Muestra el formulario para editar una salida con la informacion introducida anteriormente
+    //Muestra el formulario para editar una salida con la informacion introducida anteriormente
 
 	public function formEditar(){
 		
-		//Trae la informacion de los tipos de salida que se encuentran registrados
-		$TiposalidasModel= new TipoSalidaModel();
-		//Buscador tipo Salida
-		$tiposSalida= $TiposalidasModel->findColumn('nombreTipoSalida');
-		$tiposSalida= array('tiposSalida'=>$tiposSalida);
-
 		//Trae la informacion de los tipos de dificultad que se encuentran registrados
 		$TipoDificultadModel= new TipoDificultadModel();
 		//Buscador tipo Salida
-		$tiposDificultad= $TipoDificultadModel->findColumn('nombreTipoDificultad');
+		$tiposDificultad= $TipoDificultadModel->findAll();
 		$tiposDificultad= array('tiposDificultad'=>$tiposDificultad);
 
 		//busco la informacion ingresada anteriormente
@@ -144,15 +130,15 @@ class salidaNueva extends BaseController
 		$salidas=array('salidas'=>$salidas);
 
 		//integro las dos busquedas en un solo arreglo
-		$datos['tiposSalida']=$tiposSalida;
 		$datos['tiposDificultad']=$tiposDificultad;
 		$datos['salidas']=$salidas;
 
 		$estructura=view('head').view('header').view('index').view('editarSalida',$datos);
 		return $estructura;
-		
-	}
-	//Edita la informacion de una salida
+    }
+    
+
+    //Edita la informacion de una salida
 	public function editar(){
 		
 		//Si no se modifica la imagen sino solo el texto recibe la informacion y la ingresa en la base de datos
@@ -180,9 +166,7 @@ class salidaNueva extends BaseController
 					'desSalida'    =>  $request->getPostGet('desSalida'),
 					'dirMapa'    =>  $request->getPostGet('dirMapa'),
 					'incluyeSalida'    => $request->getPostGet('incluyeSalida'),
-					'noIncluyeSalida'    =>  $request->getPostGet('noIncluyeSalida'),
-					'tipoSalida'    =>  $tSalida,
-					'tipoDificultad' =>$tDificultad
+					'noIncluyeSalida'    =>  $request->getPostGet('noIncluyeSalida')
 				);
 				if($request->getPostGet('idSalida')){
 					$data['idSalida']=$request->getPostGet('idSalida');
@@ -270,9 +254,7 @@ class salidaNueva extends BaseController
 								'fotoSalida'	=> $direccion,
 								'dirMapa'    =>  $request->getPostGet('dirMapa'),
 								'incluyeSalida'    => $request->getPostGet('incluyeSalida'),
-								'noIncluyeSalida'    =>  $request->getPostGet('noIncluyeSalida'),
-								'tipoSalida'    =>  $tSalida,
-								'tipoDificultad' =>$tDificultad
+								'noIncluyeSalida'    =>  $request->getPostGet('noIncluyeSalida')
 							);
 							if($request->getPostGet('idSalida')){
 								$data['idSalida']=$request->getPostGet('idSalida');
@@ -298,8 +280,8 @@ class salidaNueva extends BaseController
 
 	}
 
-	//Elimina una salida
 
+    //Elimina una salida
 	public function eliminar(){
 		$salidasModel= new SalidasModel();
 		$request=\Config\Services::request();
@@ -311,6 +293,4 @@ class salidaNueva extends BaseController
 		return $estructura;
 		
 	}
-
-    
 }
