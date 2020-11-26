@@ -64,29 +64,12 @@
                         echo form_textarea(array('name'=>'noIncluyeSalida', 'class'=>'form-control'));
                         ?>
                     </div>
-                </div>
-
-                <div class="form-group">
-                        <?php 
-                        echo form_label('Dificultad','idTipoDificultad');
-                        ?></br>
-                        <!-- De la consulta realizada selecciono los nombres de los lugares disponibles por un ciclo -->
-                        <select class="form-control" name="idTipoDificultad" id="idTipoDificultad">
-                        <?php  for ($i=0; $i < count($tiposDificultad) ; $i++) {                           
-                        ?>
-                            <option value="<?php echo($tiposDificultad[$i]["idTipoDificultad"])?>"><?php echo($tiposDificultad[$i]["nombreTipoDificultad"])?></option>
-                        <?php
-                        }
-                        ?>
-                        </select>
-                </div>
-                    
+                </div>               
                 
                 <center>
                 <?php echo form_submit('insertar','Insertar','class="btn btn-danger"'); ?>
                 <center>
-                <?php if(isset($salida)){
-                    echo form_hidden('idSalida',$salida[0]['idSalida']);} ?>
+                
             </form>
         </div>
  

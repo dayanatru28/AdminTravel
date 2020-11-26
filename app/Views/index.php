@@ -17,7 +17,6 @@
                     <a class="nav-link" href="<?php echo base_url(); ?>/AdminSitiosInteres/index">Sitios de Interes</a>
                     <a class="nav-link" href="<?php echo base_url(); ?>/AdminActividadesTur/index">Act. de Ecoturismo</a>
                     <a class="nav-link" href="<?php echo base_url(); ?>/AdminBuscador/index">Act. Deportivas Clasificacion</a>
-                    <a class="nav-link" href="<?php echo base_url(); ?>/AdminTipoDificultad/index">Tipos de dificultad</a>
                     <a class="nav-link" href="<?php echo base_url(); ?>/AdminTipoPlan/index">Tipos Act. Deportivas</a>
                     <a class="nav-link" href="<?php echo base_url(); ?>/AdminCotizaciones/index">Cotizaciones</a>
                     <a class="nav-link" href="<?php echo base_url(); ?>/AdminReservaciones/index">Reservaciones</a>

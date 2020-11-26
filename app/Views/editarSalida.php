@@ -6,14 +6,13 @@
 		
 
         if(isset($salida)){
-            $idClasificacion=$salida[0]['idClasificacion'];
-            $nombreSalida=$salida[0]['nombreSalida'];
-            $desSalida=$salida[0]['desSalida'];
-            $dirMapa=$salida[0]['dirMapa'];
-            $incluyeSalida=$salida[0]['incluyeSalida'];
-            $noIncluyeSalida=$salida[0]['noIncluyeSalida'];
-            $fotoSalida=$salida[0]['fotoSalida'];
-            $tipoDificultad=$salida[0]['tipoDificultad'];
+            $idClasificacion=$salida['idClasificacion'];
+            $nombreSalida=$salida['nombreSalida'];
+            $desSalida=$salida['desSalida'];
+            $dirMapa=$salida['dirMapa'];
+            $incluyeSalida=$salida['incluyeSalida'];
+            $noIncluyeSalida=$salida['noIncluyeSalida'];
+            $fotoSalida=$salida['fotoSalida'];
         }
         else{
             $idClasificacion="";
@@ -22,9 +21,7 @@
             $dirMapa="";
             $incluyeSalida="";
             $noIncluyeSalida="";
-            $fotoSalida="";
-            $tipoDificultad="";
-            
+            $fotoSalida="";            
         }
     }
 ?>
@@ -64,7 +61,7 @@
                     <div class="form-group col-md-4">
                         <?php echo form_label('Foto de la salida','fotoSalida'); ?>
                         <div class="card__image card__image--fence">
-                            <img class="d-block w-100" src="<?php echo base_url();echo $salida[0]['fotoSalida'] ?>" > </img>
+                            <img class="d-block w-100" src="<?php echo base_url();echo $salida['fotoSalida'] ?>" > </img>
                         </div>   
                     </div>
                 </div>
@@ -106,7 +103,7 @@
                 <?php echo form_submit('editar','Editar','class="btn btn-danger"'); ?>
                 <center>
                 <?php if(isset($salida)){
-                    echo form_hidden('idSalida',$salida[0]['idSalida']);} ?>
+                    echo form_hidden('idSalida',$salida['idSalida']);} ?>
             </form>
         </div>
         <?php //echo form_close(); ?>

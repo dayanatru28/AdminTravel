@@ -2,7 +2,7 @@
 
 use CodeIgniter\Controller;
 use App\Models\SalidasModel;
-use App\Models\TipoDificultadModel;
+
 
 class AdminSalidas extends BaseController
 {
@@ -19,12 +19,7 @@ class AdminSalidas extends BaseController
     //Muestra el formulario para ingresar una nueva salida
 	public function mostrarFormulario()
 	{			
-		//Trae la informacion de los tipos de dificultad que se encuentran registrados
-		$TipoDificultadModel= new TipoDificultadModel();
-		//Buscador tipo Salida
-		$tiposDificultad= $TipoDificultadModel->findAll();
-		$tiposDificultad= array('tiposDificultad'=>$tiposDificultad);
-		$estructura=view('head').view('header').view('index').view('nuevaSalida',$tiposDificultad);
+		$estructura=view('head').view('header').view('index').view('nuevaSalida');
 		return $estructura;
     }
     
@@ -116,12 +111,7 @@ class AdminSalidas extends BaseController
 
 	public function formEditar(){
 		
-		//Trae la informacion de los tipos de dificultad que se encuentran registrados
-		$TipoDificultadModel= new TipoDificultadModel();
-		//Buscador tipo Salida
-		$tiposDificultad= $TipoDificultadModel->findAll();
-		$tiposDificultad= array('tiposDificultad'=>$tiposDificultad);
-
+		
 		//busco la informacion ingresada anteriormente
 		$salidasModel= new SalidasModel();
 		$request=\Config\Services::request();
@@ -129,11 +119,7 @@ class AdminSalidas extends BaseController
 		$salidas=$salidasModel->find([$idSalida]);
 		$salidas=array('salidas'=>$salidas);
 
-		//integro las dos busquedas en un solo arreglo
-		$datos['tiposDificultad']=$tiposDificultad;
-		$datos['salidas']=$salidas;
-
-		$estructura=view('head').view('header').view('index').view('editarSalida',$datos);
+		$estructura=view('head').view('header').view('index').view('editarSalida',$salidas);
 		return $estructura;
     }
     

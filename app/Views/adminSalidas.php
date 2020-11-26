@@ -20,7 +20,6 @@
                 <th scope="col">Mapa_Salida</th>
                 <th scope="col">Incluye_Salida</th>
                 <th scope="col">NoIncluye_Salida</th>
-                <th scope="col">Tipo_De_Dificultad</th>
                                             
                 </tr>
             </thead>
@@ -41,8 +40,7 @@
                 echo "<td>".$salida['fotoSalida']."</td>";    
                 echo "<td>".$salida['dirMapa']."</td>";    
                 echo "<td>".$salida['incluyeSalida']."</td>";    
-                echo "<td>".$salida['noIncluyeSalida']."</td>";
-                echo "<td>".$salida['tipoDificultad']."</td>";    
+                echo "<td>".$salida['noIncluyeSalida']."</td>";  
             }    
             ?>    
             </tbody>
